@@ -1,6 +1,0 @@
-module Playoff
-typeinfo appPlayoff.qmltypes
-prefer :/qt/qml/Playoff/
-Main 254.0 Main.qml
-depends QtQuick
-

@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/qt/qml/Playoff">
-    <file alias="qmldir">/home/ev/projects/Playoff/build/Desktop_Qt_6_10_1-Debug/Playoff/qmldir</file>
-  </qresource>
-</RCC>
-
