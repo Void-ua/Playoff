@@ -1,0 +1,15 @@
+{
+    "formatRevision": 1,
+    "modules": [
+        {
+            "moduleFiles": [
+                {
+                    "entries": [
+                    ],
+                    "filePath": "/home/ev/projects/Playoff/Main.qml"
+                }
+            ],
+            "moduleId": "Playoff(appPlayoff)"
+        }
+    ]
+}
