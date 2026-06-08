@@ -8,3 +8,4 @@ build/
 CMakeCache.txt
 CMakeFiles/
 compile_commands.json
+.qtcreator
