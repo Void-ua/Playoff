@@ -1,0 +1,2 @@
+-- migrations definition
+CREATE TABLE IF NOT EXISTS migrations (name TEXT PRIMARY KEY, created TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
