@@ -32,7 +32,7 @@ private:
 
     bool makeQuery(QSqlQuery *db_query, const QueryKey &key, const QVariantMap& card, const QVariantMap& filter);
     void regQuery(const QueryKey &key, const QString &str);
-    void getQuqery(QString *str, const QueryKey &key);
+    void getQuery(QString *str, const QueryKey &key);
 
     void binding(QSqlQuery *db_query, const QueryKey &key, const QVariantMap& card, const QVariantMap& filter);
 

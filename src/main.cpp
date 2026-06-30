@@ -14,6 +14,9 @@
 #include <QtSql/QSqlDatabase>
 
 #include "db/databaseservice.h"
+#include "utils/resource.h"
+
+#include "models/tournament_control.h"
 
 
 int main(int argc, char *argv[])
@@ -56,6 +59,17 @@ int main(int argc, char *argv[])
     qputenv("QT_QUICK_CONTROLS_MATERIAL_VARIANT", "Dense");
 
     QQmlApplicationEngine engine;
+    DatabaseWorker *db_worker = new DatabaseWorker(&database);
+    Resources resources;
+
+    // models
+    ControlTournament *сontrolTournament = new ControlTournament(db_worker, &resources);
+
+
+    engine.rootContext()->setContextProperty("controlTournament", сontrolTournament);
+
+
+
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,

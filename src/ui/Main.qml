@@ -2,7 +2,6 @@ import QtCore
 import QtQuick
 import QtQuick.Controls.Material
 
-
 import UiPlayoff 1.0
 
 ApplicationWindow {
@@ -15,6 +14,25 @@ ApplicationWindow {
     Material.theme: Material.System
     Material.accent: Material.color(Material.LightGreen, Material.Shade600)
 
+    WelcomePage {
+        id: welcome
+        anchors.fill: parent
+    }
+
+    App {
+        id: app
+        anchors.fill: parent
+        visible: false
+    }
+
+    Connections {
+        target: welcome
+        function onOpen() {
+            app.visible = true
+            welcome.visible = false
+        }
+    }
+
     Settings {
         category: "window"
         property alias x: app_window.x
@@ -22,7 +40,6 @@ ApplicationWindow {
         property alias width: app_window.width
         property alias height: app_window.height
     }
-
 
     // onWidthChanged: notes.updatePositions()
     // onHeightChanged: notes.updatePositions()

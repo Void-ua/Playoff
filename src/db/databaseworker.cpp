@@ -2,7 +2,9 @@
 
 DatabaseWorker::DatabaseWorker(QSqlDatabase *db, QObject *parent)
     : m_db(db), QObject{parent}
-{}
+{
+    registerQueries();
+}
 
 bool DatabaseWorker::post(int *id, const Playoff::Table &table, const Playoff::Query &query, const QVariantMap &card)
 {
@@ -59,31 +61,31 @@ void DatabaseWorker::registerQueries()
 
     // category
     regQuery(QueryKey(Playoff::Table::kCategory, Playoff::Query::kInsert, Playoff::Selector::kDefault),"INSERT INTO category (name) VALUES (?);");
-    regQuery(QueryKey(Playoff::Table::kCategory, Playoff::Query::kInsert, Playoff::Selector::kDefault),"UPDATE category SET name = ? WHERE category.id = ?;");
+    regQuery(QueryKey(Playoff::Table::kCategory, Playoff::Query::kUpdate, Playoff::Selector::kDefault),"UPDATE category SET name = ? WHERE category.id = ?;");
     regQuery(QueryKey(Playoff::Table::kCategory, Playoff::Query::kDelete, Playoff::Selector::kDefault), "DELETE FROM category WHERE category.id = ?;");
     regQuery(QueryKey(Playoff::Table::kCategory, Playoff::Query::kSelect, Playoff::Selector::kAll), "SELECT * FROM category ORDER BY category.name ASC;");
 
     // participants
     regQuery(QueryKey(Playoff::Table::kParticipants, Playoff::Query::kInsert, Playoff::Selector::kDefault),"INSERT INTO participants (name, club_id, level, born) VALUES (?, ?, ?, ?);");
-    regQuery(QueryKey(Playoff::Table::kParticipants, Playoff::Query::kInsert, Playoff::Selector::kDefault),"UPDATE participants SET name = ?, club_id = ?, level = ?, born = ? WHERE participants.id = ?;");
+    regQuery(QueryKey(Playoff::Table::kParticipants, Playoff::Query::kUpdate, Playoff::Selector::kDefault),"UPDATE participants SET name = ?, club_id = ?, level = ?, born = ? WHERE participants.id = ?;");
     regQuery(QueryKey(Playoff::Table::kParticipants, Playoff::Query::kDelete, Playoff::Selector::kDefault), "DELETE FROM participants WHERE participants.id = ?;");
     regQuery(QueryKey(Playoff::Table::kParticipants, Playoff::Query::kSelect, Playoff::Selector::kAll), "SELECT * FROM participants ORDER BY participants.name ASC;");
 
-    // participants
+    // tournament
     regQuery(QueryKey(Playoff::Table::kTournament, Playoff::Query::kInsert, Playoff::Selector::kDefault),"INSERT INTO tournament (name, place, tdate, referre, secretary) VALUES (?, ?, ?, ?, ?);");
-    regQuery(QueryKey(Playoff::Table::kTournament, Playoff::Query::kInsert, Playoff::Selector::kDefault),"UPDATE tournament SET name = ?, place = ?, tdate = ?, referre = ?, secretary = ? WHERE tournament.id = ?;");
+    regQuery(QueryKey(Playoff::Table::kTournament, Playoff::Query::kUpdate, Playoff::Selector::kDefault),"UPDATE tournament SET name = ?, place = ?, tdate = ?, referre = ?, secretary = ? WHERE tournament.id = ?;");
     regQuery(QueryKey(Playoff::Table::kTournament, Playoff::Query::kDelete, Playoff::Selector::kDefault), "DELETE FROM tournament WHERE tournament.id = ?;");
     regQuery(QueryKey(Playoff::Table::kTournament, Playoff::Query::kSelect, Playoff::Selector::kAll), "SELECT * FROM tournament ORDER BY tournament.tdate DESC;");
 
     // competition
     regQuery(QueryKey(Playoff::Table::kCompetition, Playoff::Query::kInsert, Playoff::Selector::kDefault),"INSERT INTO competition (gender, age, level, category_id, tournament_id) VALUES (?, ?, ?, ?, ?);");
-    regQuery(QueryKey(Playoff::Table::kCompetition, Playoff::Query::kInsert, Playoff::Selector::kDefault),"UPDATE competition SET gender = ?, age = ?, level = ?, category_id = ?, tournament_id = ? WHERE competition.id = ?;");
+    regQuery(QueryKey(Playoff::Table::kCompetition, Playoff::Query::kUpdate, Playoff::Selector::kDefault),"UPDATE competition SET gender = ?, age = ?, level = ?, category_id = ?, tournament_id = ? WHERE competition.id = ?;");
     regQuery(QueryKey(Playoff::Table::kCompetition, Playoff::Query::kDelete, Playoff::Selector::kDefault), "DELETE FROM competition WHERE competition.id = ?;");
     regQuery(QueryKey(Playoff::Table::kCompetition, Playoff::Query::kSelect, Playoff::Selector::kAll), "SELECT * FROM competition ORDER BY competition.tournament_id ASC;");
 
     // competition_participants
     regQuery(QueryKey(Playoff::Table::kCompetitionParticipants, Playoff::Query::kInsert, Playoff::Selector::kDefault),"INSERT INTO competition_participants (pos, competition_id, participants_id) VALUES (?, ?, ?);");
-    regQuery(QueryKey(Playoff::Table::kCompetitionParticipants, Playoff::Query::kInsert, Playoff::Selector::kDefault),"UPDATE competition_participants SET pos = ?, competition_id = ?, participants_id = ? WHERE competition_participants.id = ?;");
+    regQuery(QueryKey(Playoff::Table::kCompetitionParticipants, Playoff::Query::kUpdate, Playoff::Selector::kDefault),"UPDATE competition_participants SET pos = ?, competition_id = ?, participants_id = ? WHERE competition_participants.id = ?;");
     regQuery(QueryKey(Playoff::Table::kCompetitionParticipants, Playoff::Query::kDelete, Playoff::Selector::kDefault), "DELETE FROM competition_participants WHERE competition_participants.id = ?;");
     regQuery(QueryKey(Playoff::Table::kCompetitionParticipants, Playoff::Query::kSelect, Playoff::Selector::kAll), "SELECT * FROM competition_participants ORDER BY competition.tournament_id ASC;");
 }
@@ -91,9 +93,8 @@ void DatabaseWorker::registerQueries()
 bool DatabaseWorker::makeQuery(QSqlQuery *db_query, const QueryKey &key, const QVariantMap &card, const QVariantMap &filter)
 {
     QString str_query;
-    getQuqery(&str_query, key);
+    getQuery(&str_query, key);
     db_query->prepare(str_query);
-
     binding(db_query, key, card, filter);
 
     bool r = db_query->exec();
@@ -110,7 +111,7 @@ void DatabaseWorker::regQuery(const QueryKey &key, const QString &str)
     m_register.insert(key, str);
 }
 
-void DatabaseWorker::getQuqery(QString *str, const QueryKey &key)
+void DatabaseWorker::getQuery(QString *str, const QueryKey &key)
 {
     str->append(m_register.value(key));
 }
@@ -173,7 +174,7 @@ void DatabaseWorker::binding(QSqlQuery *db_query, const QueryKey &key, const QVa
         case Playoff::Query::kInsert:
             db_query->bindValue(0, card.value("name"));
             db_query->bindValue(1, card.value("place"));
-            db_query->bindValue(2, card.value("tdate"));
+            db_query->bindValue(2, card.value("tdate").toString());
             db_query->bindValue(3, card.value("referre"));
             db_query->bindValue(4, card.value("secretary"));
             break;

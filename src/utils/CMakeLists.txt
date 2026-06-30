@@ -10,6 +10,9 @@ find_package(Qt6 REQUIRED COMPONENTS Core)
 
 add_library(utils STATIC
     utils.h
+    datas.h
+    mapper.h
+    resource.h
 )
 
 target_include_directories(utils PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

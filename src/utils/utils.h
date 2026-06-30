@@ -40,6 +40,8 @@ Q_ENUM_NS(Selector);
 }
 
 
+
+
 struct QueryKey {
     Playoff::Table table;
     Playoff::Query query;

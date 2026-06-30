@@ -22,12 +22,14 @@ qt_add_resources(appPlayoff "configuration"
 add_subdirectory(src/utils)
 add_subdirectory(src/ui)
 add_subdirectory(src/db)
+add_subdirectory(src/models)
 
 
 target_link_libraries(appPlayoff PRIVATE
     utils
     ui
     db
+    models
     Qt6::Quick
     Qt6::Core
     Qt6::Sql
