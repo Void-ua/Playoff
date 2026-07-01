@@ -170,11 +170,12 @@ void DatabaseWorker::binding(QSqlQuery *db_query, const QueryKey &key, const QVa
         }
     }
     if (key.table == Playoff::Table::kTournament) {
+        qDebug() << card;
         switch (key.query) {
         case Playoff::Query::kInsert:
             db_query->bindValue(0, card.value("name"));
             db_query->bindValue(1, card.value("place"));
-            db_query->bindValue(2, card.value("tdate").toString());
+            db_query->bindValue(2, card.value("tdate"));
             db_query->bindValue(3, card.value("referre"));
             db_query->bindValue(4, card.value("secretary"));
             break;

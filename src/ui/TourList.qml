@@ -55,7 +55,7 @@ Item {
 
                 required property int index;
                 required property int m_id;
-                required property date m_date;
+                required property string m_date;
                 required property string m_name;
                 required property string m_place;
 
@@ -63,9 +63,20 @@ Item {
                     anchors.fill: parent
                     spacing: 20
 
+                    // Label {
+                    //     Layout.preferredHeight: 40
+                    //     Layout.preferredWidth: 50
+
+                    //     text: m_id
+                    //     font.pixelSize: Qt.application.font.pixelSize * 1.15
+                    //     verticalAlignment: Qt.AlignVCenter
+                    //     horizontalAlignment: Qt.AlignHCenter
+
+                    // }
+
                     Label {
                         Layout.preferredHeight: 40
-                        Layout.preferredWidth: 120
+                        Layout.preferredWidth: 200
 
                         text: m_date
                         font.pixelSize: Qt.application.font.pixelSize * 1.15

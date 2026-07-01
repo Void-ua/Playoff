@@ -20,11 +20,12 @@ QVariant ListTournament::data(const QModelIndex &index, int role) const
     Container<Tournament>* m_data = m_resource->container<Tournament>();
 
     const Tournament *card = m_data->item(index.row());
+
     switch (role) {
     case kId: return card->id;
     case kName: return card->name;
     case kPlace: return card->place;
-    case kDate: return card->tdate.toString("dd.MM.yyyy");//toString(locale.dateFormat(QLocale::ShortFormat));
+    case kDate: return card->tdate.toString(locale.dateFormat(QLocale::ShortFormat));
     case kReferre: return card->referre;
     case kSecretary: return card->secretary;
     }

@@ -17,11 +17,10 @@ void FormTournament::load(int id)
     setIdx(card->id);
     setName(card->name);
     setPlace(card->place);
-    setTdade(card->tdate);
+    setTdate(card->tdate);
     setReferre(card->referre);
     setSecretary(card->secretary);
 
-    m_created = card->created;
 }
 
 bool FormTournament::post()
@@ -30,10 +29,9 @@ bool FormTournament::post()
     card.id = m_idx;
     card.name = m_name;
     card.place = m_place;
-    card.tdate = m_tdade;
+    card.tdate = m_tdate;
     card.referre = m_referre;
     card.secretary = m_secretary;
-    card.created = QDateTime::currentDateTime();
 
     Playoff::Query query = m_idx == 0 ? Playoff::Query::kInsert : Playoff::Query::kUpdate;
     Playoff::Table table = Playoff::Table::kTournament;
@@ -64,11 +62,10 @@ bool FormTournament::reset()
     setIdx(0);
     setName(QString());
     setPlace(QString());
-    setTdade(QDate::currentDate());
+    setTdate(QDate::currentDate());
     setReferre(QString());
     setSecretary(QString());
 
-    m_created = QDateTime::currentDateTime();
     return true;
 }
 
@@ -113,17 +110,17 @@ void FormTournament::setPlace(const QString &newPlace)
     emit placeChanged();
 }
 
-QDate FormTournament::tdade() const
+QDate FormTournament::tdate() const
 {
-    return m_tdade;
+    return m_tdate;
 }
 
-void FormTournament::setTdade(const QDate &newTdade)
+void FormTournament::setTdate(const QDate &newTdate)
 {
-    if (m_tdade == newTdade)
+    if (m_tdate == newTdate)
         return;
-    m_tdade = newTdade;
-    emit tdadeChanged();
+    m_tdate = newTdate;
+    emit tdateChanged();
 }
 
 QString FormTournament::referre() const
@@ -152,10 +149,6 @@ void FormTournament::setSecretary(const QString &newSecretary)
     emit secretaryChanged();
 }
 
-QDateTime FormTournament::created() const
-{
-    return m_created;
-}
 
 bool FormTournament::saveValid() const
 {

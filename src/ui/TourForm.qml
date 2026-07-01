@@ -62,16 +62,16 @@ Item {
                         spacing: Style.formRowSpacing
 
                         Label {
-                            Layout.preferredWidth: implicitWidth
+                            Layout.preferredWidth: 120
                             Layout.preferredHeight: Style.formRowHeight
-                            text: "Name"
+                            text: "Назва"
+                            verticalAlignment: Qt.AlignVCenter
                         }
 
                         TextField {
                             id: f_name
                             Layout.fillWidth: true
                             Layout.preferredHeight: Style.formRowHeight
-                            placeholderText: "Name:"
                             leftPadding: 15
                             text: controlTournament.form.name
                             onTextChanged: controlTournament.form.name = text;
@@ -82,15 +82,15 @@ Item {
                         spacing: Style.formRowSpacing
 
                         Label {
-                            Layout.preferredWidth: implicitWidth
+                            Layout.preferredWidth: 120
                             Layout.preferredHeight: Style.formRowHeight
-                            text: "Place"
+                            text: "Місце проведення"
+                            verticalAlignment: Qt.AlignVCenter
                         }
                         TextField {
                             id: f_place
-                            Layout.preferredWidth: 100
+                            Layout.fillWidth: true
                             Layout.preferredHeight: Style.formRowHeight
-                            placeholderText: qsTr("Place")
                             leftPadding: 15
                             text: controlTournament.form.place
                             onTextChanged: controlTournament.form.place = text;
@@ -101,15 +101,19 @@ Item {
                         spacing: Style.formRowSpacing
 
                         Label {
-                            text: qsTr("Date")
-                            font.pixelSize: Style.fontSize_9
+                            Layout.preferredWidth: 120
+                            Layout.preferredHeight: Style.formRowHeight
+                            text: "Дата"
+                            verticalAlignment: Qt.AlignVCenter
                         }
                         DatePicker {
                             id: f_tdate
                             Layout.preferredWidth: 140
                             Layout.preferredHeight: Style.formRowHeight
                             selected_date: controlTournament.form.tdate
-                            onSelected_dateChanged: controlTournament.form.tdate = selected_date;
+                            onSelected_dateChanged: {
+                                controlTournament.form.tdate = selected_date;
+                            }
                         }
                     }
                     RowLayout {
@@ -117,9 +121,10 @@ Item {
                         spacing: Style.formRowSpacing
 
                         Label {
-                            Layout.preferredWidth: implicitWidth
+                            Layout.preferredWidth: 120
                             Layout.preferredHeight: Style.formRowHeight
-                            text: "Referre"
+                            text: "Головний суддя"
+                            verticalAlignment: Qt.AlignVCenter
                         }
                         TextField {
                             id: f_referre
@@ -135,9 +140,10 @@ Item {
                         spacing: Style.formRowSpacing
 
                         Label {
-                            Layout.preferredWidth: implicitWidth
+                            Layout.preferredWidth: 120
                             Layout.preferredHeight: Style.formRowHeight
-                            text: "Secretary"
+                            text: "Секретар"
+                            verticalAlignment: Qt.AlignVCenter
                         }
                         TextField {
                             id: f_secretary

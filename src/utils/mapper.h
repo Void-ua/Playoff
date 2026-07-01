@@ -13,20 +13,21 @@ public:
         map->insert("id", doc->id);
         map->insert("name", doc->name);
         map->insert("place", doc->place);
-        map->insert("tdate", doc->tdate);
+        map->insert("tdate", doc->tdate.toJulianDay());
         map->insert("referre", doc->referre);
         map->insert("secretary", doc->secretary);
-        map->insert("created", doc->created);
+
+        qDebug() << "TV:" << doc->tdate;
     }
     static void fromVariantMap(const QVariantMap& map, Tournament *doc){
         doc->id = map.value("id", 0).toInt();
         doc->name = map.value("name", QString()).toString();
         doc->place = map.value("place", QString()).toString();
-        // doc->tdate = map.value("tdate", QString()).toString();
-        doc->tdate = map.value("tdate", QDate::currentDate()).toDate();
+        doc->tdate = QDate::fromJulianDay(map.value("tdate", QDate::currentDate().toJulianDay()).toInt());
         doc->referre = map.value("referre", QString()).toString();
         doc->secretary = map.value("secretary", QString()).toString();
-        doc->created = map.value("created", QDateTime::currentDateTime()).toDateTime();
+
+        qDebug() << "FV tdate:" << map.value("tdate");
     };
     static void list(const QList<QVariantMap> &vData, Container<Tournament> *rData) {
         rData->clear();

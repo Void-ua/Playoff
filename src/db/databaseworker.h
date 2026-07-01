@@ -6,6 +6,7 @@
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlRecord>
 #include <QSettings>
+#include <QDate>
 
 #include "../utils/utils.h"
 

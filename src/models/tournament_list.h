@@ -2,6 +2,7 @@
 
 #include <QAbstractListModel>
 #include <QObject>
+#include <QLocale>
 
 #include "../db/databaseworker.h"
 #include "../utils/resource.h"

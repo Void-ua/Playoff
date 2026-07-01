@@ -13,11 +13,10 @@ class FormTournament : public QObject
     Q_PROPERTY(int idx READ idx WRITE setIdx NOTIFY idxChanged FINAL);
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL);
     Q_PROPERTY(QString place READ place WRITE setPlace NOTIFY placeChanged FINAL);
-    Q_PROPERTY(QDate tdade READ tdade WRITE setTdade NOTIFY tdadeChanged FINAL);
+    Q_PROPERTY(QDate tdate READ tdate WRITE setTdate NOTIFY tdateChanged FINAL);
     Q_PROPERTY(QString referre READ referre WRITE setReferre NOTIFY referreChanged FINAL);
     Q_PROPERTY(QString secretary READ secretary WRITE setSecretary NOTIFY secretaryChanged FINAL);
 
-    Q_PROPERTY(QDateTime created READ created CONSTANT);
 
     Q_PROPERTY(bool saveValid READ saveValid WRITE setSaveValid NOTIFY saveValidChanged FINAL);
     Q_PROPERTY(bool delValid READ delValid WRITE setDelValid NOTIFY delValidChanged FINAL);
@@ -39,16 +38,14 @@ public:
     QString place() const;
     void setPlace(const QString &newPlace);
 
-    QDate tdade() const;
-    void setTdade(const QDate &newTdade);
+    QDate tdate() const;
+    void setTdate(const QDate &newTdade);
 
     QString referre() const;
     void setReferre(const QString &newReferre);
 
     QString secretary() const;
     void setSecretary(const QString &newSecretary);
-
-    QDateTime created() const;
 
     bool saveValid() const;
     void setSaveValid(bool newSaveValid);
@@ -62,7 +59,7 @@ signals:
     void idxChanged();
     void nameChanged();
     void placeChanged();
-    void tdadeChanged();
+    void tdateChanged();
     void referreChanged();
     void secretaryChanged();
     void saveValidChanged();
@@ -79,10 +76,9 @@ private:
     int m_idx;
     QString m_name;
     QString m_place;
-    QDate m_tdade;
+    QDate m_tdate;
     QString m_referre;
     QString m_secretary;
-    QDateTime m_created;
     bool m_saveValid;
     bool m_delValid;
 };
