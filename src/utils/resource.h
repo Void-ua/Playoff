@@ -92,6 +92,7 @@ public:
 
     explicit Resources(QObject *parent = nullptr): QObject(parent){
         registerContainer<Tournament>(&c_tournament);
+        registerContainer<Club>(&c_club);
 
     };
 
@@ -120,6 +121,7 @@ signals:
 private:
     QHash<size_t, void*> m_containers;
     Container<Tournament> c_tournament;
+    Container<Club> c_club;
 
 
 

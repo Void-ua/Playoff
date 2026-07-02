@@ -19,3 +19,13 @@ struct Tournament {
         secretary(secretary_) {};
 
 };
+
+struct Club {
+    int id;
+    QString name;
+    QString location;
+
+    Club() = default;
+    Club(int id_, const QString& name_, const QString &location_):
+        id(id_), name(name_), location(location_) {};
+};

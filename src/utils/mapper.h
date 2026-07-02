@@ -16,8 +16,6 @@ public:
         map->insert("tdate", doc->tdate.toJulianDay());
         map->insert("referre", doc->referre);
         map->insert("secretary", doc->secretary);
-
-        qDebug() << "TV:" << doc->tdate;
     }
     static void fromVariantMap(const QVariantMap& map, Tournament *doc){
         doc->id = map.value("id", 0).toInt();
@@ -26,8 +24,6 @@ public:
         doc->tdate = QDate::fromJulianDay(map.value("tdate", QDate::currentDate().toJulianDay()).toInt());
         doc->referre = map.value("referre", QString()).toString();
         doc->secretary = map.value("secretary", QString()).toString();
-
-        qDebug() << "FV tdate:" << map.value("tdate");
     };
     static void list(const QList<QVariantMap> &vData, Container<Tournament> *rData) {
         rData->clear();
@@ -37,4 +33,27 @@ public:
             rData->add(doc);
         }
     }
+};
+
+class ClubMapper {
+public:
+    static void toVarianMap(const Club *doc, QVariantMap *map) {
+        map->clear();
+        map->insert("id", doc->id);
+        map->insert("name", doc->name);
+        map->insert("location", doc->location);
+    };
+    static void fromVariantMap(const QVariantMap& map, Club *doc) {
+        doc->id = map.value("id", 0).toInt();
+        doc->name = map.value("name", QString()).toString();
+        doc->location = map.value("location", QString()).toString();
+    };
+    static void list(const QList<QVariantMap> &vData, Container<Club> *rData) {
+        rData->clear();
+        for (const QVariantMap &m : vData) {
+            Club doc;
+            fromVariantMap(m, &doc);
+            rData->add(doc);
+        }
+    };
 };
