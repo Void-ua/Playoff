@@ -30,6 +30,8 @@ qt_add_qml_module(ui
     controls/FormButtons.qml
 
     style/Style.qml
+    QML_FILES ClubList.qml
+    QML_FILES ClubForm.qml
 )
 
 target_include_directories(ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

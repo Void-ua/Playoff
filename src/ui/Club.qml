@@ -6,15 +6,60 @@ import QtQuick.Layouts
 Item {
     id: root
 
-    Rectangle {
-        anchors.fill: parent
-        color: "transparent"
-
-
-        Label {
-            anchors.centerIn: parent
-            text: "Clubs"
+    states: [
+        State {
+            name: "LIST"
+            PropertyChanges {}
+            StateChangeScript {
+                script: {
+                    preLoader.sourceComponent = list
+                }
+            }
+        },
+        State {
+            name: "FORM"
+            PropertyChanges {}
+            StateChangeScript {
+                script: {
+                    preLoader.sourceComponent = form
+                }
+            }
         }
+    ]
+
+    state: "LIST"
+
+    StackLayout {
+        id: club_stack
+        anchors.fill: parent
+        currentIndex: 0
+
+        Loader {
+            id: preLoader
+            active: true
+            asynchronous: true
+            onLoaded: {
+                if (item) {
+                    if (item.onOpened) item.onOpened();
+                    if (item.openForm) {
+                        item.openForm.connect(function(data){ root.state = "FORM" })
+                    }
+                    if (item.closeForm) {
+                        item.closeForm.connect(function(data){ root.state = "LIST"})
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: list
+        ClubList {}
+    }
+
+    Component {
+        id: form
+        ClubForm {}
     }
 
 }

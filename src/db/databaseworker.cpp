@@ -54,8 +54,8 @@ bool DatabaseWorker::del(int id, const Playoff::Table &table, const QVariantMap 
 void DatabaseWorker::registerQueries()
 {
     // club
-    regQuery(QueryKey(Playoff::Table::kClub, Playoff::Query::kInsert, Playoff::Selector::kDefault),"INSERT INTO club (name, place) VALUES (?, ?);");
-    regQuery(QueryKey(Playoff::Table::kClub, Playoff::Query::kUpdate, Playoff::Selector::kDefault), "UPDATE club SET name = ?, place = ? WHERE club.id = ?;");
+    regQuery(QueryKey(Playoff::Table::kClub, Playoff::Query::kInsert, Playoff::Selector::kDefault),"INSERT INTO club (name, location) VALUES (?, ?);");
+    regQuery(QueryKey(Playoff::Table::kClub, Playoff::Query::kUpdate, Playoff::Selector::kDefault), "UPDATE club SET name = ?, location = ? WHERE club.id = ?;");
     regQuery(QueryKey(Playoff::Table::kClub, Playoff::Query::kDelete, Playoff::Selector::kDefault), "DELETE FROM club WHERE club.id = ?;");
     regQuery(QueryKey(Playoff::Table::kClub, Playoff::Query::kSelect, Playoff::Selector::kAll), "SELECT * FROM club ORDER BY club.name ASC;");
 
@@ -121,7 +121,7 @@ void DatabaseWorker::binding(QSqlQuery *db_query, const QueryKey &key, const QVa
     if (key.table == Playoff::Table::kClub) {
         if (key.query == Playoff::Query::kInsert || key.query == Playoff::Query::kUpdate) {
             db_query->bindValue(0, card.value("name"));
-            db_query->bindValue(1, card.value("place"));
+            db_query->bindValue(1, card.value("location"));
         }
         if (key.query == Playoff::Query::kUpdate) {
             db_query->bindValue(0, card.value("id"));

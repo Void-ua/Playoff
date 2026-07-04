@@ -17,6 +17,7 @@
 #include "utils/resource.h"
 
 #include "models/tournament_control.h"
+#include "models/club_control.h"
 
 
 int main(int argc, char *argv[])
@@ -64,9 +65,11 @@ int main(int argc, char *argv[])
 
     // models
     ControlTournament *сontrolTournament = new ControlTournament(db_worker, &resources);
+    ControlClub *controlClub = new ControlClub(db_worker, &resources);
 
 
     engine.rootContext()->setContextProperty("controlTournament", сontrolTournament);
+    engine.rootContext()->setContextProperty("controlClub", controlClub);
 
 
 

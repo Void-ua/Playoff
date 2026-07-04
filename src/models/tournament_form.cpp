@@ -45,6 +45,7 @@ bool FormTournament::post()
         return false;
     }
 
+    card.id = m_idx;
     Container<Tournament> *m_data = m_resource->container<Tournament>();
     if (query == Playoff::Query::kInsert) {
         m_data->add(card);

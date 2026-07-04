@@ -14,7 +14,8 @@ add_library(models STATIC
   tournament_form.h tournament_form.cpp
   tournament_control.h tournament_control.cpp
   clubs_list.h clubs_list.cpp
-  formclub.h formclub.cpp
+  club_form.h club_form.cpp
+  club_control.h club_control.cpp
 )
 
 target_include_directories(models PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

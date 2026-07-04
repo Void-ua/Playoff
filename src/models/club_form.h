@@ -19,7 +19,7 @@ class FormClub : public QObject
 
 
 public:
-    explicit FormClub(QObject *parent = nullptr);
+    explicit FormClub(DatabaseWorker *dw, Resources *rs, QObject *parent = nullptr);
 
     Q_INVOKABLE void load(int id);
     Q_INVOKABLE bool post();
