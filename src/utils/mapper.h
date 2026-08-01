@@ -57,3 +57,26 @@ public:
         }
     };
 };
+
+class SenseiMapper {
+public:
+    static void toVariantMap(const Sensei *doc, QVariantMap *map){
+        map->clear();
+        map->insert("id", doc->id);
+        map->insert("club_id", doc->club_id);
+        map->insert("name", doc->name);
+    };
+    static void fromVariantMap(const QVariantMap& map, Sensei *doc) {
+        doc->id = map.value("id").toInt();
+        doc->club_id = map.value("club_id").toInt();
+        doc->name = map.value("name").toString();
+    };
+    static void list(const QList<QVariantMap> &vData, Container<Sensei> *rData) {
+        rData->clear();
+        for (const QVariantMap &m : vData) {
+            Sensei doc;
+            fromVariantMap(m, &doc);
+            rData->add(doc);
+        }
+    };
+};

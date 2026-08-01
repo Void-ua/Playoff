@@ -32,6 +32,9 @@ qt_add_qml_module(ui
     style/Style.qml
     QML_FILES ClubList.qml
     QML_FILES ClubForm.qml
+    QML_FILES ClubUnit.qml
+    QML_FILES ClubSensei.qml
+    QML_FILES ClubSenseiList.qml
 )
 
 target_include_directories(ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

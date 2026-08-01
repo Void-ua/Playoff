@@ -7,7 +7,7 @@ Item {
     id: root
 
     signal openForm()
-    signal openUnit()
+    signal closeUnit()
 
     function onOpened(){
         controlClub.list.update();
@@ -25,6 +25,15 @@ Item {
             Layout.preferredHeight: 40
 
             spacing: 0
+
+            Button {
+                Layout.preferredWidth: 80
+                Layout.preferredHeight: 40
+                text: "CLUB LIST"
+                onClicked: {
+                    root.closeUnit();
+                }
+            }
 
             Item { Layout.fillWidth: true }
 

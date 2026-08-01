@@ -30,7 +30,10 @@ Item {
                 Layout.preferredWidth: 80
                 Layout.preferredHeight: 40
                 text: "ADD"
-                onClicked: root.openForm()
+                onClicked: {
+                    controlTournament.edit(0);
+                    root.openForm()
+                }
             }
 
         }

@@ -24,15 +24,6 @@ Item {
                     preLoader.sourceComponent = form
                 }
             }
-        },
-        State {
-            name: "UNIT"
-            PropertyChanges {}
-            StateChangeScript {
-                script: {
-                    preLoader.sourceComponent = unit
-                }
-            }
         }
     ]
 
@@ -56,9 +47,6 @@ Item {
                     if (item.closeForm) {
                         item.closeForm.connect(function(data){ root.state = "LIST"})
                     }
-                    if (item.openUnit) {
-                        item.openUnit.connect(function(data){ root.state = "UNIT" })
-                    }
                 }
             }
         }
@@ -72,11 +60,6 @@ Item {
     Component {
         id: form
         ClubForm {}
-    }
-
-    Component {
-        id: unit
-        ClubUnit {}
     }
 
 }

@@ -29,3 +29,13 @@ struct Club {
     Club(int id_, const QString& name_, const QString &location_):
         id(id_), name(name_), location(location_) {};
 };
+
+struct Sensei {
+    int id;
+    int club_id;
+    QString name;
+
+    Sensei() = default;
+    Sensei(int id_, int club_id_, const QString& name_):
+        id(id_), club_id(club_id_), name(name_) {};
+};

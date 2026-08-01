@@ -124,7 +124,7 @@ void DatabaseWorker::binding(QSqlQuery *db_query, const QueryKey &key, const QVa
             db_query->bindValue(1, card.value("location"));
         }
         if (key.query == Playoff::Query::kUpdate) {
-            db_query->bindValue(0, card.value("id"));
+            db_query->bindValue(2, card.value("id"));
         }
         if (key.query == Playoff::Query::kDelete) {
             db_query->bindValue(0, card.value("id"));

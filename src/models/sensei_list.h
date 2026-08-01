@@ -1,0 +1,37 @@
+#pragma once
+
+#include <QAbstractListModel>
+#include <QObject>
+
+#include "../db/databaseworker.h"
+#include "../utils/resource.h"
+#include "../utils/mapper.h"
+
+class ListSensei : public QAbstractListModel
+{
+    Q_OBJECT
+public:
+    explicit ListSensei(DatabaseWorker *dw, Resources *rs, QObject *parent = nullptr);
+
+    enum Roles {
+        kId,
+        kClubId,
+        kClubName,
+        kName
+    };
+
+    int rowCount(const QModelIndex &parent) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
+    QHash<int, QByteArray> roleNames() const override;
+
+    Q_INVOKABLE void update();
+
+public slots:
+    void onAdded();
+    void onUpdated(int pos);
+    void onDeleted(int pos);
+
+private:
+    DatabaseWorker *m_dw;
+    Resources *m_resource;
+};
