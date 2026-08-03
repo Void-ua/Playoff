@@ -10,7 +10,7 @@ Item {
     signal closeUnit()
 
     function onOpened(){
-        controlClub.list.update();
+        controlSensei.list.update();
     }
 
 
@@ -54,7 +54,7 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.verticalStretchFactor: 1
-            model: controlClub.list
+            model: controlSensei.list
 
             spacing: 3
 
@@ -70,7 +70,6 @@ Item {
                 required property int index;
                 required property int m_id;
                 required property string m_name;
-                required property string m_location;
 
                 RowLayout {
                     anchors.fill: parent
@@ -89,7 +88,7 @@ Item {
 
                     Label {
                         Layout.preferredHeight: 40
-                        Layout.preferredWidth: 300
+                        Layout.fillWidth: true
 
                         text: m_name
                         font.pixelSize: Qt.application.font.pixelSize * 1.15
@@ -98,14 +97,6 @@ Item {
 
                     }
 
-                    Label {
-                        Layout.preferredHeight: 40
-                        Layout.fillWidth: true
-
-                        text: m_location
-                        font.pixelSize: Qt.application.font.pixelSize * 1.3
-                        verticalAlignment: Qt.AlignVCenter
-                    }
                 }
 
                 MouseArea {
@@ -116,10 +107,8 @@ Item {
                     }
                     onClicked: {
                         console.log(m_id)
-                        controlClub.edit(m_id);
-                        // root.openForm();
-
-                        root.openUnit();
+                        controlSensei.edit(m_id);
+                        root.openForm();
                     }
                 }
             }

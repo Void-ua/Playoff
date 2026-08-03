@@ -59,6 +59,9 @@ Item {
                     if (item.openUnit) {
                         item.openUnit.connect(function(data){ root.state = "UNIT" })
                     }
+                    if (item.closeUnit) {
+                        item.closeUnit.connect(function(data){ root.state = "LIST"})
+                    }
                 }
             }
         }

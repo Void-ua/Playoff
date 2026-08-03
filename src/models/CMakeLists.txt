@@ -17,6 +17,8 @@ add_library(models STATIC
   club_form.h club_form.cpp
   club_control.h club_control.cpp
   sensei_list.h sensei_list.cpp
+  sensei_form.h sensei_form.cpp
+  sensei_control.h sensei_control.cpp
 )
 
 target_include_directories(models PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

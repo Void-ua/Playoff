@@ -23,6 +23,7 @@ Q_ENUM_NS(Query);
 enum class Table {
     kClub,
     kSensei,
+    kMembers,
     kCategory,
     kCompetition,
     kParticipants,

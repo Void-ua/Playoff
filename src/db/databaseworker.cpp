@@ -59,6 +59,12 @@ void DatabaseWorker::registerQueries()
     regQuery(QueryKey(Playoff::Table::kClub, Playoff::Query::kDelete, Playoff::Selector::kDefault), "DELETE FROM club WHERE club.id = ?;");
     regQuery(QueryKey(Playoff::Table::kClub, Playoff::Query::kSelect, Playoff::Selector::kAll), "SELECT * FROM club ORDER BY club.name ASC;");
 
+    // sensei
+    regQuery(QueryKey(Playoff::Table::kSensei, Playoff::Query::kInsert, Playoff::Selector::kDefault),"INSERT INTO sensei (club_id, name) VALUES (?, ?);");
+    regQuery(QueryKey(Playoff::Table::kSensei, Playoff::Query::kUpdate, Playoff::Selector::kDefault), "UPDATE sensei SET name = ?, club_id = ? WHERE sensei.id = ?;");
+    regQuery(QueryKey(Playoff::Table::kSensei, Playoff::Query::kDelete, Playoff::Selector::kDefault), "DELETE FROM sensei WHERE sensei.id = ?;");
+    regQuery(QueryKey(Playoff::Table::kSensei, Playoff::Query::kSelect, Playoff::Selector::kAll), "SELECT * FROM sensei ORDER BY sensei.name ASC;");
+
     // category
     regQuery(QueryKey(Playoff::Table::kCategory, Playoff::Query::kInsert, Playoff::Selector::kDefault),"INSERT INTO category (name) VALUES (?);");
     regQuery(QueryKey(Playoff::Table::kCategory, Playoff::Query::kUpdate, Playoff::Selector::kDefault),"UPDATE category SET name = ? WHERE category.id = ?;");
@@ -130,6 +136,26 @@ void DatabaseWorker::binding(QSqlQuery *db_query, const QueryKey &key, const QVa
             db_query->bindValue(0, card.value("id"));
         }
     }
+    if (key.table == Playoff::Table::kSensei) {
+        switch (key.query) {
+        case Playoff::Query::kInsert:
+            db_query->bindValue(0, card.value("club_id"));
+            db_query->bindValue(1, card.value("name"));
+            break;
+
+        case Playoff::Query::kUpdate:
+            db_query->bindValue(0, card.value("club_id"));
+            db_query->bindValue(1, card.value("name"));
+            db_query->bindValue(2, card.value("id"));
+            break;
+        case Playoff::Query::kDelete:
+            db_query->bindValue(0, card.value("id"));
+            break;
+        case Playoff::Query::kSelect:
+            break;
+        }
+    }
+
     if (key.table == Playoff::Table::kCategory) {
         switch (key.query) {
         case Playoff::Query::kInsert:

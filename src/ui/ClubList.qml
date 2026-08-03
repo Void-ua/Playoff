@@ -67,51 +67,69 @@ Item {
                     anchors.fill: parent
                     spacing: 20
 
-                    Label {
-                        Layout.preferredHeight: 40
-                        Layout.preferredWidth: 50
-
-                        text: m_id
-                        font.pixelSize: Qt.application.font.pixelSize * 1.15
-                        verticalAlignment: Qt.AlignVCenter
-                        horizontalAlignment: Qt.AlignHCenter
-
-                    }
-
-                    Label {
-                        Layout.preferredHeight: 40
-                        Layout.preferredWidth: 300
-
-                        text: m_name
-                        font.pixelSize: Qt.application.font.pixelSize * 1.15
-                        verticalAlignment: Qt.AlignVCenter
-                        horizontalAlignment: Qt.AlignHCenter
-
-                    }
-
-                    Label {
+                    Item {
                         Layout.preferredHeight: 40
                         Layout.fillWidth: true
 
-                        text: m_location
-                        font.pixelSize: Qt.application.font.pixelSize * 1.3
-                        verticalAlignment: Qt.AlignVCenter
-                    }
-                }
+                        RowLayout {
+                            anchors.fill: parent
+                            spacing: 20
 
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: enabled
-                    onHoveredChanged: {
-                        item_rec.color = containsMouse ? "#935b21" : "transparent";
-                    }
-                    onClicked: {
-                        console.log(m_id)
-                        controlClub.edit(m_id);
-                        // root.openForm();
+                            Label {
+                                Layout.preferredHeight: 40
+                                Layout.preferredWidth: 50
 
-                        root.openUnit();
+                                text: m_id
+                                font.pixelSize: Qt.application.font.pixelSize * 1.15
+                                verticalAlignment: Qt.AlignVCenter
+                                horizontalAlignment: Qt.AlignHCenter
+
+                            }
+
+                            Label {
+                                Layout.preferredHeight: 40
+                                Layout.preferredWidth: 300
+
+                                text: m_name
+                                font.pixelSize: Qt.application.font.pixelSize * 1.15
+                                verticalAlignment: Qt.AlignVCenter
+                                horizontalAlignment: Qt.AlignHCenter
+
+                            }
+
+                            Label {
+                                Layout.preferredHeight: 40
+                                Layout.fillWidth: true
+
+                                text: m_location
+                                font.pixelSize: Qt.application.font.pixelSize * 1.3
+                                verticalAlignment: Qt.AlignVCenter
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: enabled
+                            onHoveredChanged: {
+                                item_rec.color = containsMouse ? "#935b21" : "transparent";
+                            }
+                            onClicked: {
+                                console.log(m_id)
+                                controlClub.edit(m_id);
+                                root.openForm();
+                            }
+                        }
                     }
+
+                    Button {
+                        Layout.preferredWidth: 80
+                        Layout.preferredHeight: 40
+                        text: ">"
+                        onClicked: {
+                            root.openUnit();
+                        }
+                    }
+
                 }
             }
         }

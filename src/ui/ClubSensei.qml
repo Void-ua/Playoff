@@ -6,6 +6,8 @@ import QtQuick.Layouts
 Item {
     id: root
 
+    signal toList();
+
     states: [
         State {
             name: "LIST"
@@ -47,6 +49,9 @@ Item {
                     if (item.closeForm) {
                         item.closeForm.connect(function(data){ root.state = "LIST"})
                     }
+                    if (item.closeUnit) {
+                        item.closeUnit.connect(function(data){ root.toList()})
+                    }
                 }
             }
         }
@@ -54,7 +59,7 @@ Item {
 
     Component {
         id: list
-        ClubList {}
+        ClubSenseiList {}
     }
 
     Component {

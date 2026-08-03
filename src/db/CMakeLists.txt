@@ -14,6 +14,7 @@ add_library(db STATIC
     databaseservice.cpp
     databaseworker.h databaseworker.cpp
 
+
 )
 
 qt_add_resources(db db_migrations
@@ -23,6 +24,7 @@ qt_add_resources(db db_migrations
     sql/001_init.sql
     sql/002_create.sql
     sql/003_club.sql
+    sql/004_club_changes.sql
 
 )
 

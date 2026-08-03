@@ -6,6 +6,8 @@ import QtQuick.Layouts
 Item {
     id: root
 
+    signal closeUnit();
+
     ColumnLayout {
         anchors.fill: parent
         spacing: 10
@@ -33,6 +35,7 @@ Item {
             currentIndex: bar.currentIndex
             ClubSensei {
                 id: club_sensei
+                onToList: root.closeUnit();
             }
             ClubSensei {
                 id: club_sensei2
